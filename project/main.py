@@ -4,6 +4,8 @@ from flask_login import current_user, login_required
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
+
+from project.models import BillGroups
 # 
 engine = create_engine('sqlite:///db.sqlite')
 
@@ -28,4 +30,4 @@ def profile():
 @main.route('/groups')
 @login_required
 def groups():
-    return render_template('groups.html', name=current_user.name)
+    return render_template('groups.html', groups = BillGroups.query.all() )

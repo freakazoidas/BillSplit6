@@ -3,4 +3,17 @@
 <h1 class="title">Welcome, {{ name }}!</h1>
 <h2 class="subtitle">please find your assigned groups below</h2>
 
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Group Name</th>
+  </tr>
+  {% for group in groups %} {% if group.id in current_user.groups %}
+  <tr>
+    <td>{{ group.id }}</td>
+    <td>{{ group.group_name }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
 {% endblock %}
