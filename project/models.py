@@ -1,17 +1,11 @@
 from flask_login import UserMixin
-
-from . import db
-
-from sqlalchemy import ForeignKey
-from sqlalchemy import Integer
-from sqlalchemy.orm import Mapped
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 # from sqlalchemy.orm import mapped_column
 # from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import Mapped, relationship
 
-
+from . import db
 
 
 class User(UserMixin, db.Model):
@@ -24,15 +18,15 @@ class BillGroups (db.Model):
     __tablename__='bill_groups'
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     group_name = db.Column(db.String(255), unique=True)
-    # bill_intermediaries = relationship("BillGroupIntermediary", back_populates="group")
+    bill_intermediaries = db.relationship("BillGroupIntermediary")
 
 class BillGroupIntermediary (db.Model):
     __tablename__ = 'group_user_intermediary'
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     user_id = db.Column (db.Integer, db.ForeignKey('user.id'))
     group_id = db.Column (db.Integer, db.ForeignKey('bill_groups.id'))
-    # user = relationship("User", back_populates="bill_groups")
-    # group = relationship("BillGroup", back_populates="bill_intermediaries")
+    user = db.relationship("User")
+    bill_groups = db.relationship("BillGroups")
 
 
 class IndividualBill (db.Model):
@@ -41,4 +35,3 @@ class IndividualBill (db.Model):
     bill_id = db.Column (db.Integer, db.ForeignKey('bill_groups.id'))
     bill_item = db.Column(db.String(255))
 
-db.create_all()
