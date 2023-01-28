@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template
 from flask_login import current_user, login_required
 # 
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, create_engine
+from sqlalchemy import (Column, Float, ForeignKey, Integer, String,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
-from project.models import BillGroups
+from project.models import BillGroupIntermediary, BillGroups
+
 # 
 engine = create_engine('sqlite:///db.sqlite')
 
@@ -13,8 +15,6 @@ Session = sessionmaker(bind=engine)
 session = Session()
 # 
 from . import db
-
-
 
 main = Blueprint('main', __name__)
 
@@ -30,4 +30,8 @@ def profile():
 @main.route('/groups')
 @login_required
 def groups():
-    return render_template('groups.html', groups = BillGroups.query.all() )
+    user_id = current_user.id
+    user_groups = BillGroupIntermediary.query.filter_by(user_id=user_id).all()
+    user_group_ids = [group.group_id for group in user_groups]
+    groups = BillGroups.query.all()
+    return render_template('groups.html', groups=groups, user_group_ids=user_group_ids)
