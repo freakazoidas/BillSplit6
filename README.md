@@ -1,8 +1,8 @@
 # BillSplit6  
   
 How to run:  
-$ . auth/Scripts/activate  (for windows)
-$ . auth/bin/activate (for ubuntu)
+$ . auth/Scripts/activate  (for windows)  
+$ . auth/bin/activate (for ubuntu)  
 $ pip install -r requirements.txt  
 $ export FLASK_APP=project  
 $ flask run  
