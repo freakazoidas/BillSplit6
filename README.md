@@ -19,9 +19,8 @@ It has 2 groups assigned out of 5 in DB
 
 Groups db:
 
-![image](https://user-images.githubusercontent.com/26854208/214595857-e6de2c11-5436-47a6-88a2-bd5c1a0af89b.png)
+![image](https://user-images.githubusercontent.com/26854208/215557354-0fe68b95-91c6-4b34-9ec1-297b29036f75.png)
 
-CSS Bulma
 
 
 
@@ -41,8 +40,8 @@ Assigned groups + create/assign new groups
 Individual bill + add bill items  
 ![image](https://user-images.githubusercontent.com/26854208/215556638-3e0639d4-511f-431d-a925-99c4a886c134.png)
 
-
-
+  
+CSS Bulma  
 
 
 
