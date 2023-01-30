@@ -1,14 +1,17 @@
 {% extends "base.html" %} {% block content %}
-
 <h1 class="title">Welcome, {{ name }}!</h1>
-<h2 class="subtitle">please find your assigned bill groups below</h2>
+<h2 class="subtitle">Please find your assigned bill groups below</h2>
 <table>
   <tr>
-    <th>Bill group Name</th>
+    <th>Bill groups</th>
+    <th></th>
   </tr>
   {% for group in groups %} {% if group.id in user_group_ids %}
   <tr>
     <td>{{ group.group_name }}</td>
+    <td>
+      <a href="{{ url_for('main.bill', bill_id=group.id) }}">Goto Bill</a>
+    </td>
   </tr>
   {% endif %} {% endfor %}
 </table>

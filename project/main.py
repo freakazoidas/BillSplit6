@@ -45,10 +45,12 @@ def groups():
         db.session.add(group_intermediary)
         db.session.commit()
 
-    return render_template('groups.html', groups=groups, user_group_ids=user_group_ids)
+    return render_template('groups.html', groups=groups, user_group_ids=user_group_ids, name=current_user.name)
 
 
-from flask import Flask, render_template, request, redirect, url_for
+
+from flask import Flask, redirect, render_template, request, url_for
+
 
 @main.route('/groups/<int:bill_id>', methods=['GET', 'POST'])
 @login_required
@@ -61,6 +63,6 @@ def bill(bill_id):
         db.session.add(new_bill)
         db.session.commit()
         return redirect(url_for('main.bill', bill_id=bill_id))
-    return render_template('bill.html', bill_group=bill_group, bill_items=bill_items)
+    return render_template('bill.html', bill_group=bill_group, bill_items=bill_items, name=current_user.name)
 
 
