@@ -1,25 +1,45 @@
 {% extends "base.html" %} {% block content %}
-<h1 class="title">Welcome, {{ name }}!</h1>
-<h2 class="subtitle">Please find your assigned bill groups below</h2>
-<table>
-  <tr>
-    <th>Bill groups</th>
-    <th></th>
-  </tr>
-  {% for group in groups %} {% if group.id in user_group_ids %}
-  <tr>
-    <td>{{ group.group_name }}</td>
-    <td>
-      <a href="{{ url_for('main.bill', bill_id=group.id) }}">Goto Bill</a>
-    </td>
-  </tr>
-  {% endif %} {% endfor %}
-</table>
 
-<br />
-<form method="POST" action="{{ url_for('main.groups') }}">
-  <label for="group_name">Add new Bill Group</label>
-  <input type="text" id="group_name" name="group_name" />
-  <input type="submit" value="Add Group" />
-</form>
+<div class="container mt-5">
+  <h1 class="title text-center">Welcome, {{ name }}!</h1>
+  <h2 class="subtitle text-center">
+    Please find your assigned bill groups below
+  </h2>
+  <div class="table-container mt-5 mx-auto">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Bill groups</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for group in groups %} {% if group.id in user_group_ids %}
+        <tr>
+          <td>{{ group.group_name }}</td>
+          <td>
+            <a
+              href="{{ url_for('main.bill', bill_id=group.id) }}"
+              class="btn btn-primary"
+              >Go to Bill</a
+            >
+          </td>
+        </tr>
+        {% endif %} {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center mt-5">
+    <form method="POST" action="{{ url_for('main.groups') }}">
+      <label for="group_name">Add new Bill Group</label>
+      <input
+        type="text"
+        id="group_name"
+        name="group_name"
+        class="form-control mt-2"
+      />
+      <input type="submit" value="Add Group" class="btn btn-success mt-2" />
+    </form>
+  </div>
+</div>
 {% endblock %}
