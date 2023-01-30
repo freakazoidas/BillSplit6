@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Administrator\Documents\CodeAcademy_work\Python\BillSplit6\auth
+set VIRTUAL_ENV=C:\Users\Administrator\Documents\CodeAcademy_work\Python\BillSplit6\BillSplit6\auth
 
 if not defined PROMPT set PROMPT=$P$G
 

@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+
+<h1 class="title">Welcome, {{ name }}!</h1>
+<h2 class="subtitle">please find your assigned bill groups below</h2>
+
+<table>
+  <tr>
+    <th>Bill ID</th>
+    <th>Bill Item</th>
+  </tr>
+  {% for bill in bills %}
+  <tr>
+    <td>{{ bill.bill_id }}</td>
+    <td>{{ bill.bill_item }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

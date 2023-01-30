@@ -1,19 +1,22 @@
 {% extends "base.html" %} {% block content %}
 
 <h1 class="title">Welcome, {{ name }}!</h1>
-<h2 class="subtitle">please find your assigned groups below</h2>
-
+<h2 class="subtitle">please find your assigned bill groups below</h2>
 <table>
   <tr>
-    <th>ID</th>
-    <th>Group Name</th>
+    <th>Bill group Name</th>
   </tr>
-  {% for group in groups %} {% if group.id in current_user.groups %}
+  {% for group in groups %} {% if group.id in user_group_ids %}
   <tr>
-    <td>{{ group.id }}</td>
     <td>{{ group.group_name }}</td>
   </tr>
-  {% endfor %}
+  {% endif %} {% endfor %}
 </table>
 
+<br />
+<form method="POST" action="{{ url_for('main.groups') }}">
+  <label for="group_name">Add new Bill Group</label>
+  <input type="text" id="group_name" name="group_name" />
+  <input type="submit" value="Add Group" />
+</form>
 {% endblock %}
