@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
 # 
-from sqlalchemy import (Column, Float, ForeignKey, Integer, String, create_engine)
+from sqlalchemy import (Column, Float, ForeignKey, Integer, String,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
@@ -47,9 +48,19 @@ def groups():
     return render_template('groups.html', groups=groups, user_group_ids=user_group_ids)
 
 
+from flask import Flask, render_template, request, redirect, url_for
+
 @main.route('/groups/<int:bill_id>', methods=['GET', 'POST'])
 @login_required
 def bill(bill_id):
-    bills = IndividualBill.query.filter_by(bill_id=bill_id).all()
-    return render_template('bill.html', bills=bills)
+    bill_group = BillGroups.query.filter_by(id=bill_id).first()
+    bill_items = IndividualBill.query.filter_by(bill_id=bill_id).all()
+    if request.method == 'POST':
+        bill_item = request.form['bill_item']
+        new_bill = IndividualBill(bill_id=bill_id, bill_item=bill_item)
+        db.session.add(new_bill)
+        db.session.commit()
+        return redirect(url_for('main.bill', bill_id=bill_id))
+    return render_template('bill.html', bill_group=bill_group, bill_items=bill_items)
+
 

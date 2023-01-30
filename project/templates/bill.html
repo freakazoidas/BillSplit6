@@ -8,11 +8,16 @@
     <th>Bill ID</th>
     <th>Bill Item</th>
   </tr>
-  {% for bill in bills %}
+  {% for bill_item in bill_items %}
   <tr>
-    <td>{{ bill.bill_id }}</td>
-    <td>{{ bill.bill_item }}</td>
+    <td>{{ bill_group.id }}</td>
+    <td>{{ bill_item.bill_item }}</td>
   </tr>
   {% endfor %}
 </table>
+<h2>Add a new bill item</h2>
+<form method="post">
+  <input type="text" name="bill_item" />
+  <input type="submit" value="Submit" />
+</form>
 {% endblock %}
