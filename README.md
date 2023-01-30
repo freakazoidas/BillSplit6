@@ -1,13 +1,14 @@
 # BillSplit6
 
 How to run:  
+$ python3 -m venv auth  
 $ . auth/Scripts/activate (for windows)  
 $ . auth/bin/activate (for ubuntu)  
 $ pip install -r requirements.txt  
 $ export FLASK_APP=project  
 $ flask run
 
-use these credentials to test:  
+can use these credentials to test:  
 id:  
 asas@gmail.com
 
