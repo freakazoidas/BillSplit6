@@ -34,4 +34,6 @@ class IndividualBill (db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     bill_id = db.Column (db.Integer, db.ForeignKey('bill_groups.id'))
     bill_item = db.Column(db.String(255))
+    item_price = db.Column(db.Numeric(100))
+
 

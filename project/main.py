@@ -59,10 +59,12 @@ def bill(bill_id):
     bill_items = IndividualBill.query.filter_by(bill_id=bill_id).all()
     if request.method == 'POST':
         bill_item = request.form['bill_item']
-        new_bill = IndividualBill(bill_id=bill_id, bill_item=bill_item)
+        item_price = request.form['item_price']
+        new_bill = IndividualBill(bill_id=bill_id, bill_item=bill_item, item_price=item_price)
         db.session.add(new_bill)
         db.session.commit()
         return redirect(url_for('main.bill', bill_id=bill_id))
     return render_template('bill.html', bill_group=bill_group, bill_items=bill_items, name=current_user.name)
+
 
 
